@@ -8,7 +8,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg  # Import moduł
 
 # Generowanie punktów reprezentujących bogatych i biednych mieszkańców
 def generate_rich_poor_points(num_points):
-    # Utworzenie listy wszystkich możliwych punktów na planszy 40x40
+    # Zbudowanie listy wszystkich możliwych punktów na planszy 40x40
     all_points = list(product(range(40), range(40)))
     # Sprawdzenie, czy liczba punktów nie przekracza maksymalnej liczby miejsc
     if num_points > len(all_points):
@@ -17,7 +17,7 @@ def generate_rich_poor_points(num_points):
     # Podział punktów na dwie grupy: bogatych i biednych
     rich_points = set(all_points[:num_points // 2])
     poor_points = set(all_points[num_points // 2:num_points])
-    # Utworzenie zbioru pustych miejsc
+    # Zbudowanie zbioru pustych miejsc
     empty_spots = set(all_points) - rich_points - poor_points
     return rich_points, poor_points, empty_spots
 
@@ -217,11 +217,11 @@ def animate_movement(rich_points, poor_points, empty_spots, tolerance_rich, tole
 def create_animation_window(num_points, tolerance_rich_entry, tolerance_poor_entry):
     global rich_points, poor_points, empty_spots, animation_window
 
-    # Tworzenie okna animacji
+    # Budowa okna animacji
     animation_window = tk.Toplevel()
     animation_window.title("Animacja Ruchu Punktów")
 
-    # Tworzenie okna z wykresem
+    # Budowa okna z wykresem
     chart_window = tk.Toplevel()
     chart_window.title("Wykres Tolerancji")
 
@@ -230,7 +230,7 @@ def create_animation_window(num_points, tolerance_rich_entry, tolerance_poor_ent
     canvas = FigureCanvasTkAgg(chart_fig, master=chart_window)
     canvas.get_tk_widget().pack()
 
-    # Tworzenie ramki pod wykresem z przyciskami do dodawania/usuwania mieszkańców
+    # Budowa ramki pod wykresem z przyciskami do dodawania/usuwania mieszkańców
     button_frame = tk.Frame(chart_window)
     button_frame.pack()
 
@@ -300,35 +300,36 @@ def create_grid():
 
     create_animation_window(num_points, tolerance_rich_entry, tolerance_poor_entry)
 
-# Tworzenie głównego okna aplikacji
+# Budowa głównego okna aplikacji
 root = tk.Tk()
 root.title("Mapa miasta")
 
-# Tworzenie etykiety i pola do wprowadzenia liczby mieszkańców
+# Budowa etykiety i pola do wprowadzenia liczby mieszkańców
 tk.Label(root, text="Liczba mieszkańców:").grid(row=0, column=0)
 num_points_entry = tk.Entry(root)
 num_points_entry.grid(row=0, column=1)
 num_points_entry.insert(0, "1200")  # Wartość domyślna
 
-# Tworzenie etykiety i pola do wprowadzenia tolerancji bogatych mieszkańców
+# Budowa etykiety i pola do wprowadzenia tolerancji bogatych mieszkańców
 tk.Label(root, text="Tolerancja bogatych:").grid(row=1, column=0)
 tolerance_rich_entry = tk.Entry(root)
 tolerance_rich_entry.grid(row=1, column=1)
 tolerance_rich_entry.insert(0, "0.5")  # Wartość domyślna
 
-# Tworzenie etykiety i pola do wprowadzenia tolerancji biednych mieszkańców
+# Budowa etykiety i pola do wprowadzenia tolerancji biednych mieszkańców
 tk.Label(root, text="Tolerancja biednych:").grid(row=2, column=0)
 tolerance_poor_entry = tk.Entry(root)
 tolerance_poor_entry.grid(row=2, column=1)
 tolerance_poor_entry.insert(0, "0.5")  # Wartość domyślna
 
-# Tworzenie przycisku do generowania wykresu na podstawie wprowadzonych danych
+# Budowa przycisku do generowania wykresu na podstawie wprowadzonych danych
 generate_button = tk.Button(root, text="Generuj wykres", command=create_grid)
 generate_button.grid(row=3, column=0, columnspan=2)
 
-# Tworzenie przycisku do generowania obrazów w trybie wsadowym
+# Budowa przycisku do generowania obrazów w trybie wsadowym
 batch_generate_button = tk.Button(root, text="Generuj obrazy", command=batch_generate_images)
 batch_generate_button.grid(row=5, column=0, columnspan=2)
 
 # Rozpoczęcie głównej pętli aplikacji
+
 root.mainloop()
